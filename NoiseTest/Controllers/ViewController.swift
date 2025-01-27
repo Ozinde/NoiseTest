@@ -8,6 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    /// Actions
+        @IBAction func startTapped(_ sender: UIButton) {
+            
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
