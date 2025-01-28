@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY9-aA-oZr">
-                                <rect key="frame" x="16" y="768" width="361" height="34"/>
+                                <rect key="frame" x="16" y="752" width="361" height="34"/>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Start"/>
@@ -26,12 +26,21 @@
                                     <action selector="startTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Emr-hr-nD5"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-ZP-g7l">
+                                <rect key="frame" x="71.666666666666686" y="301" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="HSA-yw-sAz"/>
+                                    <constraint firstAttribute="width" constant="250" id="hg7-Rn-41W"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hY9-aA-oZr" secondAttribute="trailing" constant="16" id="0ad-bq-3h0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hY9-aA-oZr" secondAttribute="bottom" constant="16" id="cen-q6-9py"/>
+                            <constraint firstItem="3xL-ZP-g7l" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KQR-w4-sV3"/>
+                            <constraint firstItem="3xL-ZP-g7l" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PAG-r9-kNv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hY9-aA-oZr" secondAttribute="bottom" constant="32" id="cen-q6-9py"/>
                             <constraint firstItem="hY9-aA-oZr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="dBS-7b-76p"/>
                         </constraints>
                     </view>
@@ -81,6 +90,13 @@
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="number_3" translatesAutoresizingMaskIntoConstraints="NO" id="Yus-cc-bP7">
+                                <rect key="frame" x="121.66666666666669" y="351" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="UN5-BS-vxp"/>
+                                    <constraint firstAttribute="width" constant="150" id="yuX-9j-dvv"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gIh-qd-wty"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -94,9 +110,11 @@
                             <constraint firstItem="okU-eO-by8" firstAttribute="leading" secondItem="gIh-qd-wty" secondAttribute="leading" constant="16" id="MVd-nC-Qrt"/>
                             <constraint firstItem="SUZ-0Y-daq" firstAttribute="width" secondItem="Nwu-V8-2zD" secondAttribute="width" multiplier="0.5" id="ZQ5-En-wx5"/>
                             <constraint firstItem="okU-eO-by8" firstAttribute="top" secondItem="gdq-qC-eP0" secondAttribute="bottom" constant="16" id="aVO-sk-Hlq"/>
+                            <constraint firstItem="Yus-cc-bP7" firstAttribute="centerX" secondItem="Nwu-V8-2zD" secondAttribute="centerX" id="dMx-GG-GoA"/>
                             <constraint firstItem="SUZ-0Y-daq" firstAttribute="leading" secondItem="gIh-qd-wty" secondAttribute="leading" constant="16" id="iOd-Vc-jFF"/>
                             <constraint firstItem="gIh-qd-wty" firstAttribute="trailing" secondItem="42A-QS-i1D" secondAttribute="trailing" constant="16" id="lT6-hZ-KjO"/>
                             <constraint firstItem="gIh-qd-wty" firstAttribute="trailing" secondItem="okU-eO-by8" secondAttribute="trailing" constant="16" id="nfr-5l-BC3"/>
+                            <constraint firstItem="Yus-cc-bP7" firstAttribute="centerY" secondItem="Nwu-V8-2zD" secondAttribute="centerY" id="ya9-fA-g3K"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="dGK-8B-Zce">
@@ -104,6 +122,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="numberImage" destination="Yus-cc-bP7" id="4zb-Ph-dL8"/>
                         <outlet property="numberInputField" destination="gdq-qC-eP0" id="lCl-1o-lMY"/>
                         <outlet property="roundLabel" destination="42A-QS-i1D" id="yxj-Co-mrd"/>
                         <outlet property="submitButton" destination="okU-eO-by8" id="rTF-eT-Y63"/>
@@ -115,6 +134,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="number_3" width="50" height="50"/>
+        <image name="welcome" width="50" height="50"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

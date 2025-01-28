@@ -7,35 +7,43 @@
 
 import UIKit
 import AVFoundation
+import Network
 
 class TestViewController: UIViewController {
     
-    var noiseLevel = 5
+    var noiseLevel = 1
     var players: [URL: AVAudioPlayer] = [:]
     var duplicatePlayers: [AVAudioPlayer] = []
     var numberSet = Set<Int>()
-    var currentRound = 1
-    var seconds = 3
+    var currentRound = 9
+    var seconds = 4
     var myTimer: Timer?
+    var score = 0
     
     /// Outlets
     @IBOutlet weak var numberInputField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var roundLabel: UILabel!
+    @IBOutlet weak var numberImage: UIImageView!
     
     /// Actions
     @IBAction func submitTapped(_ sender: UIButton) {
+        tapVibe()
         submit()
     }
     
     @IBAction func exitTapped(_ sender: UIButton) {
+        tapVibe()
         dismiss(animated: true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        monitorNetwork()
+        
         numberInputField.delegate = self
+        numberImage.isHidden = true
 
         randomDigits(numberOfRandoms: 3, minNum: 1, maxNum: 9)
         startCountdown()
@@ -45,10 +53,13 @@ class TestViewController: UIViewController {
             myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
                 self?.seconds -= 1
                 if self?.seconds == 0 {
+                    self?.numberImage.image = UIImage(named: "sound_icon")
                     print("Go!")
                     self?.playTest()
                     timer.invalidate()
                 } else if let seconds = self?.seconds {
+                    self?.numberImage.isHidden = false
+                    self?.numberImage.image = UIImage(named: "number_\(seconds)")
                     print(seconds)
                 }
             }
@@ -151,13 +162,13 @@ class TestViewController: UIViewController {
             return
         }
         
-        if currentRound < 11 {
-            seconds = 2
+        if currentRound < 10 {
+            seconds = 3
             textCheck()
         } else {
-            print("All done")
+            score += noiseLevel
+            showAlert(title: "All Done", message: "Your score is \(score)")
         }
-        
     }
     
     func textCheck() {
@@ -180,10 +191,16 @@ class TestViewController: UIViewController {
         
         if Set(inputSet) == numberSet {
             print("yay")
-            noiseLevel += 1
+            if noiseLevel < 10 {
+                noiseLevel += 1
+            }
+            score += noiseLevel
+            print("score \(score)")
         } else {
             print("boo")
-            noiseLevel -= 1
+            if noiseLevel > 1 {
+                noiseLevel -= 1
+            }
         }
         
         newTest()
@@ -230,7 +247,6 @@ extension TestViewController: UITextFieldDelegate {
         if textLength > 3 {
             return false
         }
-        
         
         if string.rangeOfCharacter(from: NSCharacterSet.decimalDigits) != nil {
             return true
