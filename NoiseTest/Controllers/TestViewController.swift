@@ -15,7 +15,8 @@ class TestViewController: UIViewController {
     var players: [URL: AVAudioPlayer] = [:]
     var duplicatePlayers: [AVAudioPlayer] = []
     var numberSet = Set<Int>()
-    var currentRound = 9
+    var inputSet = [Int]()
+    var currentRound = 1
     var seconds = 4
     var myTimer: Timer?
     var score = 0
@@ -172,7 +173,6 @@ class TestViewController: UIViewController {
     }
     
     func textCheck() {
-        var inputSet = [Int]()
         guard let text = numberInputField.text else {
             print("B")
             return
@@ -210,6 +210,7 @@ class TestViewController: UIViewController {
     func newTest() {
         numberInputField.text = ""
         currentRound += 1
+        NetworkCall.postRequest(score: score, rounds: currentRound, difficulty: noiseLevel, played: inputSet, answered: Array(numberSet))
         
         roundLabel.text = "Round \(currentRound)"
         
